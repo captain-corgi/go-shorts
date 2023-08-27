@@ -2,14 +2,12 @@ package main
 
 import (
 	"log/slog"
-	"os"
+
+	"github.com/captain-corgi/go-shorts/qrcode"
 )
 
 func main() {
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
-		AddSource: false,
-		Level:     slog.LevelInfo,
-	}))
-
-	logger.Debug("Hello, world")
+	if err := qrcode.Generate("Hello, world", "hello.png"); err != nil {
+		slog.Info("No content created")
+	}
 }
